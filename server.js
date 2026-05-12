@@ -41,8 +41,8 @@ app.post('/api/contact', async (req, res) => {
 
   try {
     await transporter.sendMail({
-      from: 'stanislav.yushchuk.kb.2024@lpnu.ua',
-      to: 'stanislav.yushchuk.kb.2024@lpnu.ua',
+      from: 'EMAIL',
+      to: 'EMAIL',
       replyTo: email,
       subject: `[Контакт] ${subject}`,
       text: `Ім'я: ${name}\nEmail: ${email}\n\n${message}`,
