@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна №5 - JavaScript</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Лабораторна робота №5</h1>
+        <button id="theme-toggle">Змінити тему (День/Ніч)</button>
+    </header>
+
+    <main>
+        <section id="comments-section">
+            <h2>Коментарі попередніх роботодавців</h2>
+            <div id="comments-loader">Завантаження коментарів...</div>
+        </section>
+    </main>
+
+    <!-- Модальне вікно -->
+    <div id="feedback-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Зворотній зв'язок</h3>
+            <p>Ви на сайті вже 1 хвилину! Залиште ваші контакти:</p>
+
+            <form id="contactForm">
+                <input type="text" name="name" placeholder="Ваше ім'я" required>
+                <input type="email" name="email" placeholder="Ваш Email" required>
+                <input type="tel" name="phone" placeholder="Номер телефону" required>
+                <textarea name="message" placeholder="Ваше повідомлення" rows="5" required></textarea>
+
+                <button type="submit">Відправити</button>
+                <button type="button" id="close-modal-btn">Закрити</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Студентська робота</p>
+        <div id="footer-storage-info"></div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
+<script>
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault()
+  const data = {
+    name: this.name.value,
+    email: this.email.value,
+    subject: "Повідомлення з сайту",
+    message: this.message.value
+  }
+  const res = await fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  const json = await res.json()
+  alert(json.message)
+})
+</script>
+<script>
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault()
+  var data = {
+    name: document.querySelector('[name="name"]').value,
+    email: document.querySelector('[name="email"]').value,
+    subject: 'Повідомлення з сайту',
+    message: document.querySelector('[name="message"]').value
+  }
+  fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(function(res) { return res.json() })
+  .then(function(json) { alert(json.message) })
+  .catch(function() { alert('Помилка відправки') })
+})
+</script>
+<script>
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault()
+  var data = {
+    name: document.querySelector('[name="name"]').value,
+    email: document.querySelector('[name="email"]').value,
+    subject: 'Повідомлення з сайту',
+    message: document.querySelector('[name="message"]').value
+  }
+  fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(function(res) { return res.json() })
+  .then(function(json) { alert(json.message) })
+  .catch(function() { alert('Помилка відправки') })
+})
+</script>
